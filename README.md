@@ -4,7 +4,11 @@ Parser combinator library for C#
 
 ## Installation
 
-Under Construction
+Install the Nar package from the [NuGet](https://www.nuget.org/packages/Nar/) Package Manager.
+
+```PowerShell
+dotnet add package Nar
+```
 
 ## Usage
 
