@@ -5,6 +5,9 @@ namespace Nar {
     using static Nar.Parsers;
     using static Nar.StringParsers;
 
+    /// <summary>
+    /// Defined parsers to consume characters
+    /// </summary>
     public static class CommonStringParsers {
         /// <summary>
         /// any character

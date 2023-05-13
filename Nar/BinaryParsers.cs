@@ -1,11 +1,37 @@
 ﻿namespace Nar {
     using static Nar.Parsers;
+    /// <summary>
+    /// Defined parsers to consume bytes
+    /// </summary>
     public static class BinaryParsers {
-        public static Parser<byte, byte> Is<S>(byte expected) => Satisfy<byte>(bt => bt == expected);
-        public static Parser<byte, byte> InRange<S>(byte min, byte max) => Satisfy<byte>(bt => min <= bt && bt <= max);
+        /// <summary>
+        /// Create a parser that succeeds if and only if current byte is the expected one.
+        /// </summary>
+        /// <param name="expected">the expected byte to appear</param>
+        /// <returns>a parser that succeeds if and only if current byte is the expected one</returns>
+        public static Parser<byte, byte> Is(byte expected) => Satisfy<byte>(bt => bt == expected);
+        /// <summary>
+        /// Create a parser that succeeds if and only if current byte is in the range.
+        /// </summary>
+        /// <param name="min">the minimum of the range</param>
+        /// <param name="max">the minimum of the range</param>
+        /// <returns>a parser that succeeds if and only if current byte is in the range</returns>
+        public static Parser<byte, byte> InRange(byte min, byte max) => Satisfy<byte>(bt => min <= bt && bt <= max);
 
-        public static Parser<byte, short> Int16Satisfy<S>(Func<short, bool> test) => Int16Satisfy<S>(test, !BitConverter.IsLittleEndian);
-        public static Parser<byte, short> Int16Satisfy<S>(Func<short, bool> test, bool bigEndian) {
+        /// <summary>
+        /// Create a parser that succeeds if and only if current int16 satisfies the test.<br />
+        /// Endian is decided by <seealso cref="BitConverter.IsLittleEndian"/>.
+        /// </summary>
+        /// <param name="test">a function to test a element</param>
+        /// <returns>a parser that succeeds if and only if current int16 satisfies the test</returns>
+        public static Parser<byte, short> Int16Satisfy(Func<short, bool> test) => Int16Satisfy(test, !BitConverter.IsLittleEndian);
+        /// <summary>
+        /// Create a parser that succeeds if and only if current int16 satisfies the test.
+        /// </summary>
+        /// <param name="test">a function to test a element</param>
+        /// <param name="bigEndian">Whether the byte order is big endian</param>
+        /// <returns>a parser that succeeds if and only if current int16 satisfies the test</returns>
+        public static Parser<byte, short> Int16Satisfy(Func<short, bool> test, bool bigEndian) {
             return (source, pos) => {
                 if (source.Length <= pos + 1) {
                     return IParseResult<short>.Failure();
@@ -28,8 +54,20 @@
             };
         }
 
-        public static Parser<byte, int> Int32Satisfy<S>(Func<int, bool> test) => Int32Satisfy<S>(test, !BitConverter.IsLittleEndian);
-        public static Parser<byte, int> Int32Satisfy<S>(Func<int, bool> test, bool bigEndian) {
+        /// <summary>
+        /// Create a parser that succeeds if and only if current int32 satisfies the test.<br />
+        /// Endian is decided by <seealso cref="BitConverter.IsLittleEndian"/>.
+        /// </summary>
+        /// <param name="test">a function to test a element</param>
+        /// <returns>a parser that succeeds if and only if current int32 satisfies the test</returns>
+        public static Parser<byte, int> Int32Satisfy(Func<int, bool> test) => Int32Satisfy(test, !BitConverter.IsLittleEndian);
+        /// <summary>
+        /// Create a parser that succeeds if and only if current int32 satisfies the test.
+        /// </summary>
+        /// <param name="test">a function to test a element</param>
+        /// <param name="bigEndian">Whether the byte order is big endian</param>
+        /// <returns>a parser that succeeds if and only if current int32 satisfies the test</returns>
+        public static Parser<byte, int> Int32Satisfy(Func<int, bool> test, bool bigEndian) {
             return (source, pos) => {
                 if (source.Length <= pos + 3) {
                     return IParseResult<int>.Failure();
@@ -54,8 +92,20 @@
             };
         }
 
-        public static Parser<byte, long> Int64Satisfy<S>(Func<long, bool> test) => Int64Satisfy<S>(test, !BitConverter.IsLittleEndian);
-        public static Parser<byte, long> Int64Satisfy<S>(Func<long, bool> test, bool bigEndian) {
+        /// <summary>
+        /// Create a parser that succeeds if and only if current int64 satisfies the test.<br />
+        /// Endian is decided by <seealso cref="BitConverter.IsLittleEndian"/>.
+        /// </summary>
+        /// <param name="test">a function to test a element</param>
+        /// <returns>a parser that succeeds if and only if current int64 satisfies the test</returns>
+        public static Parser<byte, long> Int64Satisfy(Func<long, bool> test) => Int64Satisfy(test, !BitConverter.IsLittleEndian);
+        /// <summary>
+        /// Create a parser that succeeds if and only if current int64 satisfies the test.
+        /// </summary>
+        /// <param name="test">a function to test a element</param>
+        /// <param name="bigEndian">Whether the byte order is big endian</param>
+        /// <returns>a parser that succeeds if and only if current int64 satisfies the test</returns>
+        public static Parser<byte, long> Int64Satisfy(Func<long, bool> test, bool bigEndian) {
             return (source, pos) => {
                 if (source.Length <= pos + 7) {
                     return IParseResult<long>.Failure();

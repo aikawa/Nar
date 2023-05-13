@@ -1,4 +1,7 @@
 ﻿namespace Nar {
+    /// <summary>
+    /// Extensions to allow us to use Nar.Parsers.* as a method.
+    /// </summary>
     public static class ParserExtensions {
         // Basic combinators
         // Basic combinators - Concatenate/Sequence
