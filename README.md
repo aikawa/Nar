@@ -20,7 +20,7 @@ dotnet add package Nar
 
 ## Usage
 
-Under Construction
+Please look at [Wiki](https://github.com/aikawa/Nar/wiki).
 
 ## Licence
 
