@@ -270,6 +270,23 @@
                 return ZeroOrMore(tails, headToCollector(head.Value));
             });
         }
+
+        /// <summary>
+        /// Create a parser for delimited values.<br />
+        /// Discards the result of delimiter.<br />
+        /// Sugar syntax for <seealso cref="Delimited{E, T, D, U, A, R}(Parser{E, T}, Parser{E, D}, Func{D, T, U}, Func{T, Collector{U, A, R}})">Delimited(value, delimiter, (_, val) => val, collector.Accept)</seealso>
+        /// </summary>
+        /// <typeparam name="E">Type of the elements in the source</typeparam>
+        /// <typeparam name="T">Type of the parsed value</typeparam>
+        /// <typeparam name="A">Type of the intermediate object</typeparam>
+        /// <typeparam name="R">Type of the final value to return</typeparam>
+        /// <typeparam name="__">Type of the delimiter. Unused type parameter.</typeparam>
+        /// <param name="value">a parser to parse a value in the source</param>
+        /// <param name="delimiter">a parser to parse a delimiter in the source</param>
+        /// <param name="collector">collecting functions</param>
+        /// <returns>a parser for delimited values</returns>
+        public static Parser<E, R> Delimited<E, T, A, R, __>(Parser<E, T> value, Parser<E, __> delimiter, Collector<T, A, R> collector) => Delimited(value, delimiter, (_, val) => val, collector.Accept);
+
         // Structural combinators - Recursive
         /// <summary>
         /// Create a parser for recursive grammar.<br />

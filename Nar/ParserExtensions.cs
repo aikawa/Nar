@@ -28,6 +28,8 @@
             => Parsers.OneOrMore(p, collector);
         public static Parser<E, R> DelimitedBy<E, T, D, U, A, R>(this Parser<E, T> p, Parser<E, D> delimiter, Func<D, T, U> delimiterAndValue, Func<T, Collector<U, A, R>> headToCollector)
             => Parsers.Delimited(p, delimiter, delimiterAndValue, headToCollector);
+        public static Parser<E, R> DelimitedBy<E, T, A, R, __>(this Parser<E, T> p, Parser<E, __> delimiter, Collector<T, A, R> collector)
+            => Parsers.Delimited(p, delimiter, collector);
         // Basic combinators - Lookahead
         // Basic combinators - Lookahead - Positive
         public static Parser<E, R> And<E, T, U, R>(this Parser<E, T> p0, Parser<E, U> p1, Func<T, U, R> combiner)
